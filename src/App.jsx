@@ -1,36 +1,22 @@
-import { useState } from "react";
-import { useEffect } from "react";
+
+import { useEffect, useState } from "react";
 import "./App.css";
-import CardComponent from "./components/CardComponent";
-import LoadingComponent from "./components/LoadingComponent";
+import SingleUser from "./components/SingleUser";
+
 
 function App() {
-  const [myData, setMyData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false)
 
-  //useEfect
-  useEffect(() => {
-    fetch("https://dummyjson.com/products")
-      .then((res) => res.json())
-      .then((data) => {
-        setMyData(data.products);
-        setIsLoading(true)
-      })
-
-      .catch((err) => console.log(err));
-  }, []);
-
+  const[person,setPerson] = useState({
+    name:'Tihomir',
+    age:24,
+    address:'Rasovaca',
+  })
+  
   return (
-    <div className="container mx-auto">
-      {/*  <h1 className='text-4xl bg-blue-400 p-4'>Hello React</h1> */}
-
-    {isLoading?  <div className="flex flex-wrap gap-5 mt-[100px]">
-        {myData.map((el, index) => {
-          return <CardComponent item={el} key={index} />;
-        })}
-      </div>:<LoadingComponent />}
+    <div className="bg-slate-600">
+      <SingleUser person={person} setPerson={setPerson}/>
     </div>
-  );
+  )
 }
 
 export default App;
